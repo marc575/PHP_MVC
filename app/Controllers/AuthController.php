@@ -145,11 +145,8 @@ class AuthController extends Controller
             $username = trim($_POST['username']);
             $email = trim($_POST['email']);
             $role_id = $_POST['role_id'] ?? $_SESSION['role_id'];
-            if ($_POST['status']) {
-                $status = trim($_POST['status']) ? "active" : "inactive";
-            } else {
-                $status = $_SESSION['status'];
-            }
+            $state = trim($_POST['status']) ? "active" : "inactive";
+            $status = $state ?? $_SESSION['status'];
 
             $errors = [];
 
@@ -162,7 +159,7 @@ class AuthController extends Controller
             }
 
             // Enregistrement du contact
-            if (empty($errors)) {
+            if (empty($errors)) { 
                 $userModel->update($username, $email, $role_id, $status, $id);
                 $_SESSION['message'] = "Modification réussie";
                 header("Location: ../users/show");

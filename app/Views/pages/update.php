@@ -111,11 +111,7 @@
 
                     <fieldset class="fieldset w-full">
                         <label class="fieldset-label">
-                            <?php if ($user['status'] === 'active') : ?>
-                                <input type="checkbox" checked="checked" class="checkbox" name="status" />
-                            <?php else : ?>
-                                <input type="checkbox" class="checkbox" name="status" />
-                            <?php endif; ?>
+                            <input type="checkbox" <?= ($user['status'] === 'active') ? 'checked="checked"' : ''; ?> class="checkbox" name="status" />
                             Activer maintent
                         </label>
                     </fieldset>
