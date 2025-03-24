@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="../../../public/assets/logo.png" type="image/x-icon">
+    <link rel="shortcut icon" href="/assets/logo.png" type="image/x-icon">
     <title>Listes des logs</title>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
@@ -37,7 +37,7 @@
                     <?php endif; ?>
                 </ul>
             </div>
-            <a href="/" class="text-xl text-blue-900 font-bold">Gestion Utilisateurs</a>
+            <a href="/" class="text-xl text-blue-900 font-bold"><img src="/assets/logo.png" alt="logo" width="50"></a>
         </div>
         <div class="navbar-center hidden lg:flex">
             <ul class="menu menu-horizontal px-1 font-bold">
