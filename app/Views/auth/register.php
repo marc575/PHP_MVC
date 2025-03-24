@@ -48,7 +48,7 @@
                         <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" fill="none" stroke="currentColor"><path d="M2.586 17.414A2 2 0 0 0 2 18.828V21a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h1a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h.172a2 2 0 0 0 1.414-.586l.814-.814a6.5 6.5 0 1 0-4-4z"></path><circle cx="16.5" cy="7.5" r=".5" fill="currentColor"></circle></g></svg>
                         <input type="password" required name="confirm_password" placeholder="Confirmer le mot de passe" minlength="8" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Confirmer le mot de passe" />
                     </label>
-
+                
                     <fieldset class="fieldset">
                         <select class="select" name="role_id">
                             <option disabled selected>Type de compte</option>
@@ -63,8 +63,8 @@
                             Activer maintent
                         </label>
                     </fieldset>
-            
-                    <button type="submit" class="btn btn-primary w-full my-2">S'inscrire</button>
+
+                    <button type="submit" class="btn btn-primary w-full my-2">Inscrire</button>
                 </form>
                 <a href="../contact/show" class="text-blue-500 mt-3 font-medium hover:text-blue-900">Voir la liste des contacts</a>
             </div>

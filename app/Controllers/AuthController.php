@@ -4,6 +4,8 @@ namespace App\Controllers;
 use App\Core\Controller;
 use App\Models\Session;
 use App\Models\User;
+use DateTime;
+use DateTimeZone;
 
 class AuthController extends Controller
 {
@@ -80,14 +82,8 @@ class AuthController extends Controller
                     $_SESSION['status'] = $user['status'];
 
                     $sessionModel->create();
-                    $_SESSION['login_time'] = date('Y-m-d H:i:s');
 
-                    if($user['role_id'] === 1) {
-                        header("Location: ../contact/show");
-                    } else {
-                        header("Location: ../");
-
-                    }
+                    header("Location: ../contact/show");
                 } else {
                     $errors[] = "Nom d'utilisateur ou mot de passe incorrect.";
                 }
@@ -101,10 +97,12 @@ class AuthController extends Controller
 
     public function logout()
     {
-        $logout_time = date('Y-m-d H:i:s');
+        $timezone = new DateTimeZone('GMT+1');
+        $logout_time = new DateTime('now', $timezone);
+        $logout_time = $logout_time->format('Y-m-d H:i:s');
         $sessionModel = new Session();
         $sessionModel->update($logout_time);
-        
+
         session_start();
         session_unset();
         session_destroy();
@@ -119,9 +117,17 @@ class AuthController extends Controller
         }
 
         $userModel = new User();
-        $users = $userModel->show();
 
-        $this->view('pages/show', ['users' => $users]);
+        if (isset($_SESSION['role_id']) && $_SESSION['role_id'] === 1) {
+            $users = $userModel->show();
+            $this->view('pages/show', ['users' => $users]);
+        } elseif(isset($_SESSION['role_id']) && $_SESSION['role_id'] === 2) {
+            $user = $userModel->findById($_SESSION['user_id']);
+            $this->view('pages/show', ['profil' => $user]);
+        } else {
+            header("Location: ../auth/login");
+        }
+
     }
     
     public function update()
@@ -138,8 +144,9 @@ class AuthController extends Controller
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $username = trim($_POST['username']);
             $email = trim($_POST['email']);
-            $role_id = trim($_POST['role_id']);
-            $status = trim($_POST['status']) ? "active" : "inactive";
+            $role_id = $_POST['role_id'] ?? $_SESSION['role_id'];
+            $state = $_POST['status'] ?? $_SESSION['status'];
+            $status = $state ? "active" : "inactive";
 
             $errors = [];
 

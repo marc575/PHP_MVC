@@ -9,28 +9,63 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 <body>
-    <div class="navbar bg-base-100 shadow-sm">
-        <div class="flex-1">
-            <a class="px-10 font-bold text-xl">LCs</a>
-        </div>
-        <div class="flex gap-2">
-            <input type="text" placeholder="Search" class="input input-bordered w-24 md:w-auto" />
-            <div class="dropdown dropdown-end">
-                <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
-                    <div class="w-10 rounded-full">
-                        <img
-                        alt="Tailwind CSS Navbar component"
-                        src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
-                    </div>
+    <div class="navbar bg-base-100 shadow-sm px-10">
+        <div class="navbar-start">
+            <div class="dropdown">
+                <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" /> </svg>
                 </div>
                 <ul
                     tabindex="0"
                     class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
-                    <li><a href="/contact/add">Ajouter un contact</a></li>
-                    <li><a href="/contact/show">Voir les contacts</a></li>
-                    <li><a href="/logout">Deconnexion</a></li>
+                    <li>
+                        <a href="/">Accueil</a>
+                    </li>
+                    <?php if (isset($_SESSION['user_id'])) : ?>
+                    <li>
+                        <a href="../contact/show">
+                            <?php if (isset($_SESSION['user_id']) && $_SESSION['role_id'] === 1) : ?>
+                                Contats
+                            <?php else: ?>
+                                Profil
+                            <?php endif; ?>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/">Logs</a>
+                    </li>
+                    <?php endif; ?>
                 </ul>
             </div>
+            <a href="/" class="text-xl text-blue-900 font-bold">Gestion Utilisateurs</a>
+        </div>
+        <div class="navbar-center hidden lg:flex">
+            <ul class="menu menu-horizontal px-1">
+                <li>
+                    <a href="/">Accueil</a>
+                </li>
+                <?php if (isset($_SESSION['user_id'])) : ?>
+                <li>
+                    <a href="../contact/show">
+                            <?php if (isset($_SESSION['user_id']) && $_SESSION['role_id'] === 1) : ?>
+                                Contats
+                            <?php else: ?>
+                                Profil
+                            <?php endif; ?>
+                    </a>
+                </li>
+                <li>
+                    <a href="/">Logs</a>
+                </li>
+                <?php endif; ?>
+            </ul>
+        </div>
+        <div class="navbar-end"></div>
+        <?php if (!isset($_SESSION['user_id'])) : ?>
+            <a href="/auth/login" class="btn btn-primary">Se connecter</a>
+        <?php else: ?>
+            <a href="/auth/logout" class="btn btn-outline-primary">Deconnexion</a>
+        <?php endif; ?>
         </div>
     </div>
     
@@ -66,7 +101,7 @@
                         <input type="email" name="email" value="<?php echo $user['email']; ?>" required placeholder="exemple@mail.com" required/>
                     </label>
             
-
+                    <?php if (isset($_SESSION['role_id']) && $_SESSION['role_id'] === 1) : ?>
                     <fieldset class="fieldset">
                         <select class="select" name="role_id">
                             <option value="1" <?= ($user['role_id'] === 1) ? 'selected' : ''; ?>>Administrateur</option>
@@ -84,12 +119,15 @@
                             Activer maintent
                         </label>
                     </fieldset>
+                    <?php endif; ?>
             
                     <button type="submit" class="btn btn-primary w-full">Mettre à jour</button>
                 </form>
                 <?php endif; ?>
                 
+                <?php if (isset($_SESSION['role_id']) && $_SESSION['role_id'] === 1) : ?>
                 <a href="../contact/show" class="text-blue-500 mt-3 font-medium hover:text-blue-900">Voir la liste des contacts</a>
+                <?php endif; ?>
             </div>
           </div>
         </div>

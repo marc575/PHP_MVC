@@ -18,28 +18,59 @@
                 <ul
                     tabindex="0"
                     class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
-                    <li><a>Accueil</a></li>
-                    <li><a>A Propos</a></li>
-                    <li><a>FAQs</a></li>
+                    <li>
+                        <a href="/">Accueil</a>
+                    </li>
+                    <?php if (isset($_SESSION['user_id'])) : ?>
+                    <li>
+                        <a href="../contact/show">
+                            <?php if (isset($_SESSION['user_id']) && $_SESSION['role_id'] === 1) : ?>
+                                Contats
+                            <?php else: ?>
+                                Profil
+                            <?php endif; ?>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/">Logs</a>
+                    </li>
+                    <?php endif; ?>
                 </ul>
             </div>
-            <a class="text-xl text-blue-500 font-bold">Gestion Utilisateur</a>
+            <a href="/" class="text-xl text-blue-900 font-bold">Gestion Utilisateurs</a>
         </div>
         <div class="navbar-center hidden lg:flex">
             <ul class="menu menu-horizontal px-1">
-                <li><a>Accueil</a></li>
-                <li><a>A Propos</a></li>
-                <li><a>FAQs</a></li>
+                <li>
+                    <a href="/">Accueil</a>
+                </li>
+                <?php if (isset($_SESSION['user_id'])) : ?>
+                <li>
+                    <a href="../contact/show">
+                            <?php if (isset($_SESSION['user_id']) && $_SESSION['role_id'] === 1) : ?>
+                                Contats
+                            <?php else: ?>
+                                Profil
+                            <?php endif; ?>
+                    </a>
+                </li>
+                <li>
+                    <a href="/">Logs</a>
+                </li>
+                <?php endif; ?>
             </ul>
         </div>
-        <div class="navbar-end">
+        <div class="navbar-end"></div>
+        <?php if (!isset($_SESSION['user_id'])) : ?>
             <a href="/auth/login" class="btn btn-primary">Se connecter</a>
+        <?php else: ?>
+            <a href="/auth/logout" class="btn btn-outline-primary">Deconnexion</a>
+        <?php endif; ?>
         </div>
     </div>
 
     <?php if (isset($_SESSION['status']) && $_SESSION['status'] === "active") : ?>
     <section class="container mx-auto mt-10">
-    <?php if (isset($_SESSION['role_id']) && $_SESSION['role_id'] === 1) : ?>
         <div class="overflow-x-auto rounded-box border border-base-200 bg-base-100">
             <table class="table">
                 <!-- head -->
@@ -77,46 +108,6 @@
                 </tbody>
             </table>
         </div>
-        <?php endif; ?>
-        <?php if (isset($_SESSION['role_id']) && $_SESSION['role_id'] === 2) : ?>
-        <div class="overflow-x-auto rounded-box border border-base-200 bg-base-100">
-            <table class="table">
-                <!-- head -->
-                <thead class="bg-base-200">
-                    <tr>
-                        <th>id</th>
-                        <th>user_id</th>
-                        <th>login</th>
-                        <th>logout</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php if (isset($sessionsUser)) : ?>
-                        <?php foreach ($sessionsUser as $session) : ?>
-                            <tr>
-                                <th><?= $session['id'] ?></th>
-                                <td><?= $session['user_id'] ?></td>
-                                <td> 
-                                <?php 
-                                    $login = new DateTime($session['login_time']);
-                                    echo $login->format('H:i:s d/m/Y');
-                                ?>
-                                </td>
-                                <td> 
-                                <?php 
-                                    if ($session['logout_time'] !== null) {
-                                        $logout = new DateTime($session['logout_time']);
-                                        echo $logout->format('H:i:s d/m/Y');
-                                    }
-                                ?>
-                                </td>
-                            </tr>
-                        <?php endforeach; ?>
-                    <?php endif; ?>
-                </tbody>
-            </table>
-        </div>
-        <?php endif; ?>
         </section>
         <?php endif; ?>
 </body>

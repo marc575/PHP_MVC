@@ -24,10 +24,7 @@ if ($uri === '/auth/register') {
 } elseif ($uri === '/contact/delete') {
     $controller = new AuthController();
     $controller->delete();
-} elseif ($uri === '/auth/login') {
-    $controller = new AuthController();
-    $controller->login();
-} elseif ($uri === '/logout') {
+} elseif ($uri === '/auth/logout') {
     $controller = new AuthController();
     $controller->logout();
 } else {

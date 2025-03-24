@@ -27,14 +27,14 @@ class Session
 
     public function show()
     {
-        $stmt = $this->db->prepare("SELECT * FROM sessions");
+        $stmt = $this->db->prepare("SELECT * FROM sessions ORDER BY id DESC");
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function findByUserID()
     {
-        $stmt = $this->db->prepare("SELECT * FROM sessions WHERE user_id = :user_id");
+        $stmt = $this->db->prepare("SELECT * FROM sessions WHERE user_id = :user_id ORDER BY id DESC");
         $stmt->execute(['user_id' => $_SESSION['user_id']]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }

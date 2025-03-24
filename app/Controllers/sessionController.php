@@ -15,9 +15,16 @@ class SessionController extends Controller
         }
 
         $sessionModel = new Session();
-        $sessions = $sessionModel->show();
-        $sessionsUser = $sessionModel->findByUserID();
 
-        $this->view('pages/dashboard', ['sessions' => $sessions, 'sessionsUser'=> $sessionsUser]);
+        if (isset($_SESSION['role_id']) && $_SESSION['role_id'] === 1) {
+            $sessions = $sessionModel->show();
+        } elseif(isset($_SESSION['role_id']) && $_SESSION['role_id'] === 2) {
+            $sessions = $sessionModel->findByUserID();
+        } else {
+            $this->view('pages/dashboard');
+        }
+        
+
+        $this->view('pages/dashboard', ['sessions' => $sessions]);
     }
 }
