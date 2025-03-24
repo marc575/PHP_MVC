@@ -28,7 +28,7 @@
                     <li>
                         <a href="../users/show">
                             <?php if (isset($_SESSION['user_id']) && $_SESSION['role_id'] === 1) : ?>
-                                Contats
+                                Contacts
                             <?php else: ?>
                                 Profil
                             <?php endif; ?>
@@ -51,7 +51,7 @@
                 <li>
                     <a href="../users/show">
                             <?php if (isset($_SESSION['user_id']) && $_SESSION['role_id'] === 1) : ?>
-                                Contats
+                                Contacts
                             <?php else: ?>
                                 Profil
                             <?php endif; ?>
