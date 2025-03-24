@@ -87,7 +87,7 @@
         </div>
     </div>
     
-    <footer class="footer sm:footer-horizontal bg-neutral text-neutral-content items-center p-4 mt-10">
+    <footer class="footer sm:footer-horizontal bg-neutral text-neutral-content items-center p-4">
         <aside class="grid-flow-col items-center">
             <img src="/assets/logo.png" alt="logo" width="50" class="rounded-full">
             <p>Copyright © 2025 - Tous droits reservés | Tatchou Marc</p>

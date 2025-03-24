@@ -11,6 +11,11 @@ class AuthController extends Controller
 {
     public function register()
     {
+        if (!isset($_SESSION['user_id'])) {
+            header("Location: ../pages/404");
+            exit();
+        }
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $username = trim($_POST['username']);
             $email = trim($_POST['email']);
