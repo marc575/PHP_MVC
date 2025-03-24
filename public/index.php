@@ -29,7 +29,7 @@ if ($uri === '/auth/register') {
     $controller->logout();
 } elseif ($uri === '/logs') {
     $controller = new SessionController();
-    $controller->show();
+    $controller->logs();
 } elseif ($uri === '/') {
     $controller = new HomeController();
     $controller->home();
