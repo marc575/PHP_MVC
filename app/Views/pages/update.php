@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../../../public/assets/logo.png" type="image/x-icon">
-    <title>Update Contact</title>
+    <title>MAJ Utilisateur</title>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
@@ -17,13 +17,13 @@
                 </div>
                 <ul
                     tabindex="0"
-                    class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+                    class="menu menu-sm dropdown-content font-bold bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
                     <li>
                         <a href="/">Accueil</a>
                     </li>
                     <?php if (isset($_SESSION['user_id'])) : ?>
                     <li>
-                        <a href="../contact/show">
+                        <a href="../users/show">
                             <?php if (isset($_SESSION['user_id']) && $_SESSION['role_id'] === 1) : ?>
                                 Contats
                             <?php else: ?>
@@ -32,7 +32,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="/">Logs</a>
+                        <a href="/logs">Logs</a>
                     </li>
                     <?php endif; ?>
                 </ul>
@@ -40,13 +40,13 @@
             <a href="/" class="text-xl text-blue-900 font-bold">Gestion Utilisateurs</a>
         </div>
         <div class="navbar-center hidden lg:flex">
-            <ul class="menu menu-horizontal px-1">
+            <ul class="menu menu-horizontal px-1 font-bold">
+                <?php if (isset($_SESSION['user_id'])) : ?>
                 <li>
                     <a href="/">Accueil</a>
                 </li>
-                <?php if (isset($_SESSION['user_id'])) : ?>
                 <li>
-                    <a href="../contact/show">
+                    <a href="../users/show">
                             <?php if (isset($_SESSION['user_id']) && $_SESSION['role_id'] === 1) : ?>
                                 Contats
                             <?php else: ?>
@@ -55,7 +55,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="/">Logs</a>
+                    <a href="/logs">Logs</a>
                 </li>
                 <?php endif; ?>
             </ul>
@@ -81,7 +81,7 @@
                         <span><?= htmlspecialchars($_SESSION['message']) ?></span>
                 </div>
                 <?php endif; ?>
-                <form action="../contact/update?id=<?= $user['id'] ?>" class="space-y-4" method="POST">
+                <form action="../user/update?id=<?= $user['id'] ?>" class="space-y-4" method="POST">
                     <?php if (isset($errors)) : ?>
                         <ul>
                             <?php foreach ($errors as $error) : ?>
@@ -126,7 +126,7 @@
                 <?php endif; ?>
                 
                 <?php if (isset($_SESSION['role_id']) && $_SESSION['role_id'] === 1) : ?>
-                <a href="../contact/show" class="text-blue-500 mt-3 font-medium hover:text-blue-900">Voir la liste des contacts</a>
+                <a href="../users/show" class="text-blue-500 mt-3 font-medium hover:text-blue-900">Voir la liste des contacts</a>
                 <?php endif; ?>
             </div>
           </div>

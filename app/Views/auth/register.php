@@ -66,7 +66,7 @@
 
                     <button type="submit" class="btn btn-primary w-full my-2">Inscrire</button>
                 </form>
-                <a href="../contact/show" class="text-blue-500 mt-3 font-medium hover:text-blue-900">Voir la liste des contacts</a>
+                <a href="../users/show" class="text-blue-500 mt-3 font-medium hover:text-blue-900">Voir la liste des contacts</a>
             </div>
           </div>
         </div>

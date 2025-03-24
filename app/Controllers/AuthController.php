@@ -83,7 +83,7 @@ class AuthController extends Controller
 
                     $sessionModel->create();
 
-                    header("Location: ../contact/show");
+                    header("Location: ../users/show");
                 } else {
                     $errors[] = "Nom d'utilisateur ou mot de passe incorrect.";
                 }
@@ -145,8 +145,11 @@ class AuthController extends Controller
             $username = trim($_POST['username']);
             $email = trim($_POST['email']);
             $role_id = $_POST['role_id'] ?? $_SESSION['role_id'];
-            $state = $_POST['status'] ?? $_SESSION['status'];
-            $status = $state ? "active" : "inactive";
+            if ($_POST['status']) {
+                $status = trim($_POST['status']) ? "active" : "inactive";
+            } else {
+                $status = $_SESSION['status'];
+            }
 
             $errors = [];
 
@@ -162,7 +165,7 @@ class AuthController extends Controller
             if (empty($errors)) {
                 $userModel->update($username, $email, $role_id, $status, $id);
                 $_SESSION['message'] = "Modification réussie";
-                header("Location: ../contact/show");
+                header("Location: ../users/show");
             }
 
             $this->view('pages/update', ['errors' => $errors]);

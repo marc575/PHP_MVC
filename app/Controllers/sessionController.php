@@ -6,7 +6,7 @@ use App\Models\Session;
 
 class SessionController extends Controller
 {
-    public function dashboard()
+    public function show()
     {
         
         if (!isset($_SESSION['user_id'])) {
@@ -21,10 +21,10 @@ class SessionController extends Controller
         } elseif(isset($_SESSION['role_id']) && $_SESSION['role_id'] === 2) {
             $sessions = $sessionModel->findByUserID();
         } else {
-            $this->view('pages/dashboard');
+            $this->view('pages/logs');
         }
         
 
-        $this->view('pages/dashboard', ['sessions' => $sessions]);
+        $this->view('pages/logs', ['sessions' => $sessions]);
     }
 }
