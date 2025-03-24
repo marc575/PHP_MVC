@@ -77,7 +77,7 @@
                 <thead class="bg-base-200">
                     <tr>
                         <th>id</th>
-                        <th>user_id</th>
+                        <th>compte</th>
                         <th>login</th>
                         <th>logout</th>
                     </tr>
@@ -87,7 +87,7 @@
                         <?php foreach ($sessions as $session) : ?>
                             <tr>
                                 <th><?= $session['id'] ?></th>
-                                <td><?= $session['user_id'] ?></td>
+                                <td><?= $session['user'] ?></td>
                                 <td> 
                                 <?php 
                                     $login = new DateTime($session['login_time']);

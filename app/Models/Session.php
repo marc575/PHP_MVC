@@ -27,7 +27,8 @@ class Session
 
     public function show()
     {
-        $stmt = $this->db->prepare("SELECT * FROM sessions ORDER BY id DESC");
+        $stmt = $this->db->prepare("SELECT sessions.id AS id, sessions.login_time AS login_time, sessions.logout_time AS logout_time,
+        users.email AS user FROM sessions JOIN users ON sessions.user_id = users.id ORDER BY id DESC");
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }

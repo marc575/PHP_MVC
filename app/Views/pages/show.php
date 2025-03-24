@@ -102,7 +102,7 @@
                                 <th><?= $user['id'] ?></th>
                                 <td><?= $user['username'] ?></td>
                                 <td><?= $user['email'] ?></td>
-                                <td><?= $user['role_id'] ?></td>
+                                <td><?= $user['role'] ?></td>
                                 <td><?= $user['status'] ?></td>
                                 <td>
                                     <a href="../user/update?id=<?php echo($user['id']); ?>"><i class="fa-solid fa-pen-to-square"></i></a>

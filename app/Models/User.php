@@ -32,7 +32,8 @@ class User
 
     public function show()
     {
-        $stmt = $this->db->prepare("SELECT * FROM users");
+        $stmt = $this->db->prepare("SELECT users.id AS id, users.username AS username, users.email AS email, users.role_id AS role_id,
+        users.status AS status, roles.name AS role FROM users JOIN roles ON users.role_id = roles.id");
         $stmt->execute();
         return $stmt->fetchAll();
     }
