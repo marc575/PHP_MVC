@@ -6,7 +6,7 @@ use App\Models\Session;
 
 class SessionController extends Controller
 {
-    public function show()
+    public function logs()
     {
         
         if (!isset($_SESSION['user_id'])) {
